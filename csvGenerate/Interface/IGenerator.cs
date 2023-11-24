@@ -8,7 +8,7 @@ namespace csvGenerate.Interface
 {
     internal interface IGenerate
     {
-        public void Generate();
+        public void Generate(List<string> param);
 
     }
 }

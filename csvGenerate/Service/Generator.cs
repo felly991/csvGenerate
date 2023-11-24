@@ -18,7 +18,7 @@ namespace csvGenerate.Service
         private string[] words;
         public Generator(List<string> param)
         {
-            words = Enumerable.Range(0, rnd.Next(0, 10000))
+            words = Enumerable.Range(0, rnd.Next(0, 10))
                     .Select(x =>
                     {
                         int i = 0;
@@ -50,11 +50,13 @@ namespace csvGenerate.Service
                         return str.Remove(str.Length-1);
                     }).ToArray();
         }
-        public void Generate()
+        public void Generate(List<string> param)
         {
             words.ToList().Sort();
             using var writer = new StreamWriter("output.csv");
             using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
+            csv.WriteField(param);
+            csv.NextRecord();
             for (int i = 0; i < words.Length; i++)
             {
                 csv.WriteField(words[i]);

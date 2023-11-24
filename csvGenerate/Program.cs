@@ -2,5 +2,5 @@
 using System.Globalization;
 
 List<string> symb = new List<string>() { "int", "string", "date", "string" };
-new Generator(symb).Generate();
+new Generator(symb).Generate(symb);
 Console.WriteLine("...");
