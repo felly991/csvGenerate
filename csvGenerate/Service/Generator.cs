@@ -12,13 +12,13 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace csvGenerate.Service
 {
-    internal class Generator : IGenerate, ICheck
+    internal class Generator : IGenerate, ICheck, INormalize
     {
         private readonly Random rnd = new Random();
         private string[] words;
         public Generator(List<string> param)
         {
-            words = Enumerable.Range(0, rnd.Next(0, 10))
+            words = Enumerable.Range(0, rnd.Next(0, 10000))
                     .Select(x =>
                     {
                         int i = 0;
@@ -27,9 +27,10 @@ namespace csvGenerate.Service
                         {
                             if (Check(i, param.Count) && param[i] == "int")
                             {
-                                var range = Enumerable.Range(0, rnd.Next(2, 8));
+                                var range = Enumerable.Range(0, rnd.Next(2, 5));
                                 var chars = range.Select(x => (char)rnd.Next('0', '9')).ToArray();
                                 str += new string(chars) + ",";
+                                Normalize(ref str);
                                 i++;
                             }
                             if (Check(i, param.Count) && param[i] == "date")
@@ -41,7 +42,7 @@ namespace csvGenerate.Service
                             }
                             if (Check(i, param.Count) && param[i] == "string")
                             {
-                                var range = Enumerable.Range(0, rnd.Next(5, 10));
+                                var range = Enumerable.Range(0, rnd.Next(0, 10));
                                 var chars = range.Select(x => (char)rnd.Next('A', 'Z')).ToArray();
                                 str += new string(chars) + ",";
                                 i++;
@@ -68,5 +69,13 @@ namespace csvGenerate.Service
             return item < count;
         }
 
+        public void Normalize(ref string number)
+        {
+            while (number[0] == '0')
+            {
+                number = number.Remove(0, 1);
+
+            }
+        }
     }
 }
