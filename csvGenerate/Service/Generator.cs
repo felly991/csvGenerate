@@ -47,7 +47,7 @@ namespace csvGenerate.Service
                                 i++;
                             }
                         }
-                        return str;
+                        return str.Remove(str.Length-1);
                     }).ToArray();
         }
         public void Generate()
