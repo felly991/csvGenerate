@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace csvGenerate.Interface
+namespace csvGenerate.Models
 {
-    internal interface INormalize
+    internal class AddressModel
     {
-        public void Normalize(ref string number);
+
+        public List<string>? Address { get; set; }
     }
 }

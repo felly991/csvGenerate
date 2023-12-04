@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace csvGenerate.Interface
+namespace csvGenerate.Models
 {
-    internal interface ICheck
+    internal class SurnameModel
     {
-        public bool Check(int item, int count);
+        public List<string>? Surname { get; set; }
+        
     }
 }
